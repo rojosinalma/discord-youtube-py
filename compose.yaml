@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
-  discord-bot:
+  discord-yt-py-bot:
     build: .
-    container_name: discord-yt-py
+    container_name: discord-yt-py-bot
     environment:
       - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
     restart: unless-stopped
