@@ -9,13 +9,27 @@ intents.message_content = True
 intents.reactions = True
 intents.voice_states = True  # Needed for joining channels
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
 @bot.event
 async def on_ready():
+    activity = discord.Game(name="Type !help for commands")
     print(f"Logged in as {bot.user}")
 
 last_play_request = {}
+
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(
+        title="Bot Commands",
+        description="Here's what I can do:",
+        color=discord.Color.blue()
+    )
+    embed.add_field(name="!play <YouTube URL>", value="Get a prompt to play a YouTube video in your voice channel.", inline=False)
+    embed.add_field(name="!stop", value="Stop playback, but stay in the voice channel.", inline=False)
+    embed.add_field(name="!leave", value="Disconnect from the voice channel.", inline=False)
+    embed.add_field(name="!help", value="Show this help message.", inline=False)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def play(ctx, url: str):
@@ -43,6 +57,14 @@ async def stop(ctx):
         await ctx.send("Playback stopped.")
     else:
         await ctx.send("Nothing is playing right now.")
+
+@bot.command()
+async def leave(ctx):
+    if ctx.voice_client:
+        await ctx.voice_client.disconnect()
+        await ctx.send("Left the voice channel.")
+    else:
+        await ctx.send("I'm not in a voice channel.")
 
 @bot.event
 async def on_reaction_add(reaction, user):
@@ -92,15 +114,6 @@ async def on_reaction_add(reaction, user):
         except Exception as e:
             await reaction.message.channel.send(f"Failed to play: `{e}`")
 
-@bot.command()
-async def leave(ctx):
-    if ctx.voice_client:
-        await ctx.voice_client.disconnect()
-        await ctx.send("Left the voice channel.")
-    else:
-        await ctx.send("I'm not in a voice channel.")
-
-# --- MAIN ---
 if __name__ == "__main__":
     token = os.getenv("DISCORD_BOT_TOKEN")
     if not token:
