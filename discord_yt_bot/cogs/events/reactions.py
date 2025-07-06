@@ -4,11 +4,11 @@ from discord_yt_bot.utils.youtube import extract_audio_url
 
 
 class ReactionHandler(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_reaction_add(self, reaction: discord.Reaction, user: discord.User) -> None:
+    async def on_reaction_add(self, reaction: discord.Reaction, user: discord.User):
         if user.bot:
             return
 
@@ -53,5 +53,5 @@ class ReactionHandler(commands.Cog):
                 await reaction.message.channel.send(f"Failed to play: `{e}`")
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot: commands.Bot):
     await bot.add_cog(ReactionHandler(bot))

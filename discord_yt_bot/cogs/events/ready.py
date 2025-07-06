@@ -3,16 +3,16 @@ import discord
 
 
 class ReadyEvent(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_ready(self) -> None:
+    async def on_ready(self):
         activity = discord.Game(name="Type !help for commands")
         if self.bot.user:
             print(f"Logged in as {self.bot.user}")
         await self.bot.change_presence(activity=activity)
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot: commands.Bot):
     await bot.add_cog(ReadyEvent(bot))

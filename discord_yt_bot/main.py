@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 
-def create_bot() -> commands.Bot:
+def create_bot():
     intents = discord.Intents.default()
     intents.message_content = True
     intents.reactions = True
@@ -14,14 +14,14 @@ def create_bot() -> commands.Bot:
     return bot
 
 
-async def load_cogs(bot: commands.Bot) -> None:
+async def load_cogs(bot: commands.Bot):
     await bot.load_extension("discord_yt_bot.cogs.commands.help")
     await bot.load_extension("discord_yt_bot.cogs.commands.music")
     await bot.load_extension("discord_yt_bot.cogs.events.ready")
     await bot.load_extension("discord_yt_bot.cogs.events.reactions")
 
 
-def main() -> None:
+def main():
     bot = create_bot()
 
     token = os.getenv("DISCORD_BOT_TOKEN")

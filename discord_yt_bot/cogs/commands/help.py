@@ -3,11 +3,11 @@ import discord
 
 
 class Help(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command()
-    async def help(self, ctx: commands.Context) -> None:
+    async def help(self, ctx: commands.Context):
         embed = discord.Embed(
             title="Bot Commands",
             description="Here's what I can do:",
@@ -30,5 +30,5 @@ class Help(commands.Cog):
         await ctx.send(embed=embed)
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot: commands.Bot):
     await bot.add_cog(Help(bot))

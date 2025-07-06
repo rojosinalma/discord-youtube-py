@@ -1,7 +1,7 @@
 import yt_dlp
 
 
-def extract_audio_url(url: str) -> str:
+def extract_audio_url(url: str):
     """Return direct audio URL for a YouTube video."""
     ydl_opts = {
         "format": "bestaudio/best",
