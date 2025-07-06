@@ -20,4 +20,4 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Run the bot
-CMD ["python", "bot.py"]
+CMD ["python", "-m", "discord_yt_bot.main"]

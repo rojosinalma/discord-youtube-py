@@ -11,3 +11,9 @@ environment variable. Start the bot using:
 ```
 python -m discord_yt_bot.main
 ```
+
+To build and run the Docker image instead, execute:
+
+```
+docker compose up --build
+```
