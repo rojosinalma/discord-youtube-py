@@ -12,6 +12,7 @@ WORKDIR /app
 
 # Copy requirements and bot code
 COPY requirements.txt .
+COPY discord_yt_bot ./discord_yt_bot
 COPY bot.py .
 
 # Install Python dependencies
@@ -19,5 +20,4 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Run the bot
-CMD ["python", "bot.py"]
-
+CMD ["python", "-m", "discord_yt_bot.main"]
